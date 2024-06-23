@@ -12,17 +12,17 @@ inputs:
 runs:
   using: composite
   steps:
-    uses: actions/github-script@v5
-    with:
-      script: |
-        const fs = require('fs');
-        const report = fs.readFileSync('${{ inputs.message-file-path }}', 'utf8');
-        const identifierMessage = '${{ inputs.identifier-message }}' || undefined;
-        const commentOnPr = require('./src/commentOnPr.cjs');
-        await commentOnPr(
-          {
-            message: report,
-            identifierMessage
-          },
-          { github, context }
-        )
+    - uses: actions/github-script@v5
+      with:
+        script: |
+          const fs = require('fs');
+          const report = fs.readFileSync('${{ inputs.message-file-path }}', 'utf8');
+          const identifierMessage = '${{ inputs.identifier-message }}' || undefined;
+          const commentOnPr = require('./src/commentOnPr.cjs');
+          await commentOnPr(
+            {
+              message: report,
+              identifierMessage
+            },
+            { github, context }
+          )
