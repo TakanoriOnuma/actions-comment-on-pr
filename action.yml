@@ -1,0 +1,27 @@
+name: Comment On PR
+description: GitHubのPR上にコメントする
+
+inputs:
+  message-file-path:
+    description: 'コメント内容が記載されたファイルパス'
+    required: true
+  identifier-message:
+    description: 'コメント内容の識別子'
+    required: false
+
+runs:
+  using: composite
+  uses: actions/github-script@v5
+  with:
+    script: |
+      const fs = require('fs');
+      const report = fs.readFileSync('${{ inputs.message-file-path }}', 'utf8');
+      const identifierMessage = '${{ inputs.identifier-message }}' || undefined;
+      const commentOnPr = require('./src/commentOnPr.cjs');
+      await commentOnPr(
+        {
+          message: report,
+          identifierMessage
+        },
+        { github, context }
+      )
