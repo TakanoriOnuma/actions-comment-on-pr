@@ -29,7 +29,7 @@ jobs:
 
       - name: Prepare Message file
         run: |
-          echo "テストメッセージです！" >> ./message.md
+          echo "自作アクションからのメッセージ投稿です。" >> ./message.md
           echo "|PR番号|PRタイトル|" >> ./message.md
           echo "|:--|:--|" >> ./message.md
           echo "|${{ github.event.pull_request.number }}|${{ github.event.pull_request.title }}|" >> ./message.md
