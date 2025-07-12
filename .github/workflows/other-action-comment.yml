@@ -1,4 +1,4 @@
-name: 動作確認用のアクション
+name: 既存のアクションのコメントの動作確認
 
 on:
   pull_request:
@@ -16,26 +16,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: 'package.json'
-          cache: 'npm'
-
-      - name: Install
-        run: npm install
-
-      - name: Build Action
-        run: npm run build
-
       - name: Prepare Message file
         run: |
-          echo "自作アクションからのメッセージ投稿です。" >> ./message.md
+          echo "\`thollander/actions-comment-pull-request\`からのメッセージ投稿です。" >> ./message.md
           echo "|PR番号|PRタイトル|" >> ./message.md
           echo "|:--|:--|" >> ./message.md
           echo "|${{ github.event.pull_request.number }}|${{ github.event.pull_request.title }}|" >> ./message.md
 
-      - name: Run Action
-        uses: ./
+      - name: Comment On PR
+        uses: thollander/actions-comment-pull-request@v3
         with:
-          message-file-path: ./message.md
-          identifier-message: '<!-- TEST COMMENT -->'
+          file-path: ./message.md
+          comment-tag: test-comment
