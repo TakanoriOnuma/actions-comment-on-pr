@@ -1,0 +1,33 @@
+name: 動作確認用のアクション
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+
+jobs:
+  test-comment:
+    runs-on: ubuntu-22.04
+    if: github.event.action == 'opened' || github.event.changes.title != null
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install
+        run: npm Install
+
+      - name: Build Action
+        run: npm run build
+
+      - name: Prepare Message file
+        run: |
+          echo "テストメッセージです！" > ./message.txt
+          echo "PRタイトル: ${{ github.event.pull_request.title }}" > ./message.txt
+
+      - name: Run Action
+        uses: ./
+        with:
+          message-file-path: ./message.txt
+          identifier-message: '<!-- TEST COMMENT -->'
