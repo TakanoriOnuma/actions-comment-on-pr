@@ -1,0 +1,30 @@
+name: 既存のアクションのコメントの動作確認
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - edited
+
+jobs:
+  test-comment:
+    runs-on: ubuntu-22.04
+    if: github.event.action != 'edited' || github.event.changes.title != null
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare Message file
+        run: |
+          echo "テストメッセージです！" >> ./message.md
+          echo "|PR番号|PRタイトル|" >> ./message.md
+          echo "|:--|:--|" >> ./message.md
+          echo "|${{ github.event.pull_request.number }}|${{ github.event.pull_request.title }}|" >> ./message.md
+
+      - name: Comment On PR
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          file-path: ./message.md
+          comment-tag: test-comment

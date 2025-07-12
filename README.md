@@ -44,3 +44,7 @@ jobs:
 | `message-file-path`  | コメント内容が記載されたファイルパス。このファイルの中身をコメントする。 | ✅     |
 | `identifier-message` | コメント内容の識別子。この識別子があるコメントを編集する。               |        |
 | `github-token`       | GitHubトークン。デフォルトでは　`${{ secrets.GITHUB_TOKEN }}` が入る。   |        |
+
+## その他
+
+同等の機能が[actions-comment-pull-request](https://github.com/thollander/actions-comment-pull-request/)でできそう
