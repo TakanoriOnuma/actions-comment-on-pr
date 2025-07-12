@@ -29,8 +29,8 @@ jobs:
 
       - name: Prepare Message file
         run: |
-          echo "テストメッセージです！" > ./message.txt
-          echo "PRタイトル: ${{ github.event.pull_request.title }}" > ./message.txt
+          echo "テストメッセージです！" >> ./message.txt
+          echo "PRタイトル: ${{ github.event.pull_request.title }}" >> ./message.txt
 
       - name: Run Action
         uses: ./
