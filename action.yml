@@ -3,10 +3,10 @@ description: GitHubのPR上にコメントする
 
 inputs:
   message-file-path:
-    description: 'コメント内容が記載されたファイルパス'
+    description: 'コメント内容が記載されたファイルパス。このファイルの中身をコメントする。'
     required: true
   identifier-message:
-    description: 'コメント内容の識別子'
+    description: 'コメント内容の識別子。この識別子があるコメントを編集する。'
   github-token:
     description: GitHubトークン
     default: ${{ github.token }}
