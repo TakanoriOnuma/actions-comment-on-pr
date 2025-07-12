@@ -31,7 +31,7 @@ jobs:
         run: |
           echo "テストメッセージです！" >> ./message.txt
           echo "|PR番号|PRタイトル|" >> ./message.txt
-          echo "|---|---|" >> ./message.txt
+          echo "|:--|:--|" >> ./message.txt
           echo "|${{ github.event.pull_request.number }}|${{ github.event.pull_request.title }}|" >> ./message.txt
 
       - name: Run Action
