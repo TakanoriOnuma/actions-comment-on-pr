@@ -18,7 +18,7 @@ jobs:
 
       - name: Prepare Message file
         run: |
-          echo "`thollander/actions-comment-pull-request`からのメッセージ投稿です。" >> ./message.md
+          echo "\`thollander/actions-comment-pull-request\`からのメッセージ投稿です。" >> ./message.md
           echo "|PR番号|PRタイトル|" >> ./message.md
           echo "|:--|:--|" >> ./message.md
           echo "|${{ github.event.pull_request.number }}|${{ github.event.pull_request.title }}|" >> ./message.md
