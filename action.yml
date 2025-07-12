@@ -1,0 +1,16 @@
+name: Comment On PR
+description: GitHubのPR上にコメントする
+
+inputs:
+  message-file-path:
+    description: 'コメント内容が記載されたファイルパス'
+    required: true
+  identifier-message:
+    description: 'コメント内容の識別子'
+  github-token:
+    description: GitHubトークン
+    default: ${{ github.token }}
+
+runs:
+  using: node20
+  main: dist/index.js
